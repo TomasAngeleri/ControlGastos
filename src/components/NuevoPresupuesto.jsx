@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Mensaje from './Mensaje';
 
 
@@ -7,15 +7,13 @@ function NuevoPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto }
 
   const handlePresupuesto = (e) => {
     e.preventDefault();
-    if(!presupuesto || presupuesto < 0){
+    if (!presupuesto || presupuesto < 0) {
       setMensaje('No es un presupuesto valido');
       setIsValidPresupuesto(false);
       return
     }
     setIsValidPresupuesto(true)
     setMensaje();
-    console.log(typeof(presupuesto))
-    
   }
 
   return (
