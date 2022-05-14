@@ -1,9 +1,7 @@
 import React from 'react'
 import formatCurrency from '../utils/formatCurrency'
 
-const ControlPresupuesto = ({
-  presupuesto
-}) => {
+const ControlPresupuesto = ({presupuesto}) => {
   return (
     <div className='contenedor-presupuesto contenedor sombra dos-columnas'>
       <div>

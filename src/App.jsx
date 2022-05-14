@@ -7,9 +7,13 @@ function App() {
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
 
   const [visibleModal, setVisibleModal] = useState(false);
+  const [animarModal, setAnimarModal] = useState(false);
 
   const handleOnClick = () => {
     setVisibleModal(true);
+    setTimeout(() => {
+        setAnimarModal(true);
+    }, 500);
   }
 
   return (
@@ -33,10 +37,12 @@ function App() {
       {visibleModal &&
         <Modal
           setVisibleModal={setVisibleModal}
+          animarModal={animarModal}
+          setAnimarModal={setAnimarModal}
         />
       }
     </div>
   );
 }
 
-export default App
+export default App;
