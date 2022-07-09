@@ -36,4 +36,4 @@ function NuevoPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto }
   )
 }
 
-export default NuevoPresupuesto
+export default NuevoPresupuesto;
