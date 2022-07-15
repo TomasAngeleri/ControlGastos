@@ -32,9 +32,19 @@ function App() {
   }
 
   const guardarGasto = gasto => {
+    console.log('guardar gasto', gasto);
+    if(gasto.id){
+      console.log('Entrando en el if de guardar gasto');
+    // Actualizo gasto
+    const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ?
+      gasto : gastoState )
+    setGastos(gastosActualizados);
+    }else{
+    // Nuevo gasto
     gasto.id = generarId();
     gasto.fecha = Date.now();
     setGastos([...gastos, gasto]);
+    }
     setAnimarModal(false);
     setTimeout(() => {
       setVisibleModal(false);

@@ -27,7 +27,7 @@ const diccionarioImagenes = {
 }
 
 const Gasto = ({ gasto, setEditarGasto }) => {
-  const { categoria, nombre, monto,fecha } = gasto;
+  const { categoria, nombre, monto, fecha } = gasto;
 
   const leadingActions = () => (
     <LeadingActions>
