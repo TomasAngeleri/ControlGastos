@@ -7,7 +7,8 @@ const Modal = ({
   animarModal, 
   setAnimarModal, 
   guardarGasto,
-  editarGasto }) => {
+  editarGasto,
+  setEditarGasto }) => {
 
   const [nombre, setNombre] = useState('');
   const [monto, setMonto] = useState('');
@@ -31,6 +32,7 @@ const Modal = ({
     setTimeout(() => {
       setVisibleModal(false);
     }, 500);
+    setEditarGasto({})
   }
 
   const handleAgregarGasto = (e) => {
