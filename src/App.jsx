@@ -7,19 +7,23 @@ import IconoNuevoGasto from './img/nuevo-gasto.svg';
 
 function App() {
 
-  const [presupuesto, setPresupuesto] = useState(0)
-  const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
+  const [presupuesto, setPresupuesto] = useState(
+    Number(localStorage.getItem('presupuesto') ?? 0)
+  );
+  const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
   const [animarModal, setAnimarModal] = useState(false);
-  const [gastos, setGastos] = useState([]);
+  const [gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  );
   const [editarGasto, setEditarGasto] = useState({});
 
   useEffect(() => {
-    if(Object.keys(editarGasto).length > 0){
+    if (Object.keys(editarGasto).length > 0) {
       setVisibleModal(true);
       setTimeout(() => {
-      setAnimarModal(true);
-    }, 500);
+        setAnimarModal(true);
+      }, 500);
     }
   }, [editarGasto]);
 
@@ -36,19 +40,19 @@ function App() {
     const gastosActualizados = gastos.filter(elem => elem.id !== id);
     setGastos(gastosActualizados);
   }
-  
+
   const guardarGasto = gasto => {
-    if(gasto.id){
-    // Actualizo gasto
-    const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ?
-      gasto : gastoState )
-    setGastos(gastosActualizados);
-    setEditarGasto({})
-    }else{
-    // Nuevo gasto
-    gasto.id = generarId();
-    gasto.fecha = Date.now();
-    setGastos([...gastos, gasto]);
+    if (gasto.id) {
+      // Actualizo gasto
+      const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ?
+        gasto : gastoState);
+      setGastos(gastosActualizados);
+      setEditarGasto({})
+    } else {
+      // Nuevo gasto
+      gasto.id = generarId();
+      gasto.fecha = Date.now();
+      setGastos([...gastos, gasto]);
     }
     setAnimarModal(false);
     setTimeout(() => {
@@ -56,8 +60,26 @@ function App() {
     }, 500);
   }
 
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto ?? 0);
+  }, [presupuesto]);
+
+  useEffect(() => {
+    // No puedo almacenar arreglos en LocalStorage, por eso lo transforno a string
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? []);
+  }, [gastos]);
+
+  useEffect(() => {
+    const hayPresupuestoLS = localStorage.getItem('presupuesto');
+    if (hayPresupuestoLS > 0) {
+      setIsValidPresupuesto(true);
+    }
+  }, []);
+
+
+
   return (
-    <div className={visibleModal ? 'fijar':''}>
+    <div className={visibleModal ? 'fijar' : ''}>
       <Header
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
